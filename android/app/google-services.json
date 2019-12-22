@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "370079460295",
+    "firebase_url": "https://admisionutpl-a48ad.firebaseio.com",
+    "project_id": "admisionutpl-a48ad",
+    "storage_bucket": "admisionutpl-a48ad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:370079460295:android:3ab4cb93a5aa4891bd87e2",
+        "android_client_info": {
+          "package_name": "io.devmintech.aditumutpl"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "370079460295-atgodb5rb6ujrn67qe0tccih5ushedhb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "io.devmintech.aditumutpl",
+            "certificate_hash": "5eefccd33f35b3de9dbe745381bbea566ef40b1d"
+          }
+        },
+        {
+          "client_id": "370079460295-3qvbc8m9bnq3csohqhftdhfmkmhatg3c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-HsZvKJ-Yew-KmUQGj59J3vgFJaKX9BI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "370079460295-3qvbc8m9bnq3csohqhftdhfmkmhatg3c.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "370079460295-2rrac7um9807ivip413fq856tqeer3fg.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "io.flutter.app.FlutterApplication"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
