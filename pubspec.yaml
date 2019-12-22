@@ -32,6 +32,7 @@ dependencies:
   firebase_auth: ^0.8.4+5
   google_sign_in: ^4.0.1+1
   flutter_flip_view: ^1.0.3
+  bottom_navy_bar: ^5.2.2
   rxdart: ^0.21.0
   provider: 3.1.0
   font_awesome_flutter: 8.4.0

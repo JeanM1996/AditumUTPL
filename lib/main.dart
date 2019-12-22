@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_analytics/observer.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:quizapp/screens/leaderboard.dart';
 import 'services/services.dart';
 import 'screens/screens.dart';
 import 'package:provider/provider.dart';
@@ -29,6 +30,7 @@ class MyApp extends StatelessWidget {
           '/general': (context) => GeneralScreen(),
           '/profile': (context) => ProfileScreen(),
           '/about': (context) => AboutScreen(),
+          '/leaderboard': (context) => LeaderboardScreen(),
         },
 
         // Theme

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
-class AboutScreen extends StatelessWidget {
+class LeaderboardScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       appBar: AppBar(
-        backgroundColor: Colors.lightBlue,
-        title: Text("Acerca de"),
+        backgroundColor: Colors.lightGreen,
+        title: Text("LeaderBoard"),
       ),
       body: Center(
         child: Column(
@@ -22,6 +23,7 @@ class AboutScreen extends StatelessWidget {
           ],
         ),
       ),
+
     );
   }
 }
