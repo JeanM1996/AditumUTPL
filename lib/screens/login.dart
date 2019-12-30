@@ -41,8 +41,13 @@ class LoginScreenState extends State<LoginScreen> {
               textAlign: TextAlign.center,
             ),
             Text('Your Tagline'),
+            RegisterButton(
+              text: 'Registrarse',
+              icon: FontAwesomeIcons.userPlus,
+              color: Colors.black45,
+            ),
             LoginButton(
-              text: 'LOGIN WITH GOOGLE',
+              text: 'Ingresar con Google',
               icon: FontAwesomeIcons.google,
               color: Colors.black45,
               loginMethod: auth.googleSignIn,
@@ -85,4 +90,34 @@ class LoginButton extends StatelessWidget {
       ),
     );
   }
+}
+
+class RegisterButton extends StatelessWidget {
+final Color color;
+final IconData icon;
+final String text;
+
+
+const RegisterButton(
+{Key key, this.text, this.icon, this.color})
+: super(key: key);
+
+@override
+Widget build(BuildContext context) {
+  return Container(
+    margin: EdgeInsets.only(bottom: 10),
+    child: FlatButton.icon(
+      padding: EdgeInsets.all(30),
+      icon: Icon(icon, color: Colors.white),
+      color: color,
+      onPressed: () async {
+          Navigator.pushReplacementNamed(context, '/register');
+
+      },
+      label: Expanded(
+        child: Text('$text', textAlign: TextAlign.center),
+      ),
+    ),
+  );
+}
 }
