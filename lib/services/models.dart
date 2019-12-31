@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 //// Embedded Maps
 
 class Option {
@@ -90,3 +92,68 @@ class Report {
 
 }
 
+class User {
+  final String userID;
+  final String fullName;
+  final String email;
+  final String cellphone;
+  final String dni;
+  final String gender;
+  final String province;
+  final String profilePictureURL;
+  final String academic;
+  final String carrera1;
+  final String carrera2;
+
+  User({
+    this.userID,
+    this.fullName,
+    this.email,
+    this.cellphone,
+    this.dni,
+    this.gender,
+    this.province,
+    this.profilePictureURL,
+    this.academic,
+    this.carrera1,
+    this.carrera2,
+  });
+
+  Map<String, Object> toJson() {
+    return {
+      'userID': userID,
+      'fullName': fullName,
+      'email': email,
+      'phone': cellphone,
+      'dni': dni,
+      'gender': gender,
+      'province': province,
+      'profilePictureURL': profilePictureURL,
+      'appIdentifier': 'AditumUTPL',
+      'academic': academic,
+      'carrera1': carrera1,
+      'carrera2': carrera2,
+    };
+  }
+
+  factory User.fromJson(Map<String, Object> doc) {
+    User user = new User(
+      userID: doc['userID'],
+      fullName: doc['fullName'],
+      email: doc['email'],
+      cellphone: doc['phone'],
+      dni: doc['dni'],
+      gender: doc['gender'],
+      province: doc['province'],
+      profilePictureURL: doc['profilePictureURL'],
+      academic: doc['academic'],
+      carrera1: doc['carrera1'],
+      carrera2: doc['carrera2'],
+    );
+    return user;
+  }
+
+  factory User.fromDocument(DocumentSnapshot doc) {
+    return User.fromJson(doc.data);
+  }
+}

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:quizapp/shared/CheckboxFormField.dart';
 import '../shared/shared.dart';
@@ -500,34 +501,8 @@ class _StepperBodyState extends State<StepperBody> {
         print("Name: ${data.name}");
         print("Phone: ${data.phone}");
         print("Email: ${data.email}");
-        print("Age: ${data.gender}");
-
-        showDialog(
-            context: context,
-            child: new AlertDialog(
-              title: new Text("Details"),
-              //content: new Text("Hello World"),
-              content: new SingleChildScrollView(
-                child: new ListBody(
-                  children: <Widget>[
-                    new Text("Name : " + data.name),
-                    new Text("Phone : " + data.phone),
-                    new Text("Email : " + data.email),
-                    new Text("Age : " + data.gender),
-                    new Text("Age : " + data.gender),
-
-                  ],
-                ),
-              ),
-              actions: <Widget>[
-                new FlatButton(
-                  child: new Text('OK'),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            ));
+        print("Age: ${data.carrera1}");
+        _signUp(fullName: data.name,email: data.email,cellphone: data.phone,gender: data.gender,dni: data.dni,province: data.province,academic: data.school,carrera1: data.carrera1,carrera2: data.carrera2,password: data.pass);
       }
     }
 
@@ -585,4 +560,42 @@ class _StepperBodyState extends State<StepperBody> {
           ]),
         ));
   }
+  void _signUp(
+      {   String userID,
+      String fullName,
+      String email,
+      String password,
+      String cellphone,
+      String dni,
+      String gender,
+      String province,
+      String academic,
+       String carrera1,
+      String carrera2,
+        BuildContext context}) async {
+
+      try {
+        SystemChannels.textInput.invokeMethod('TextInput.hide');
+        await AuthService.signUp(email, password).then((uID) {
+          AuthService.addUser(new User(
+              userID: uID,
+              email: email,
+              fullName: fullName,
+              cellphone:cellphone,
+              dni:dni,
+              gender:gender,
+            province:province,
+            academic:academic,
+            carrera1:carrera1,
+            carrera2:carrera2,
+          ));
+        });
+      } catch (e) {
+        print("Fallo el Registro: $e");
+
+      }
+    }
+
+
+
 }
