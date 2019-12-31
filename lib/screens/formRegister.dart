@@ -86,7 +86,7 @@ class _StepperBodyState extends State<StepperBody> {
     "Pastaza",
     "Pichincha",
     "Santa Elena",
-        "Santo Domingo de los Tsáchilas",
+    "Santo Domingo de los Tsáchilas",
     "Sucumbíos",
     "Tungurahua",
     "Zamora Chinchipe",];
@@ -120,7 +120,7 @@ class _StepperBodyState extends State<StepperBody> {
     "Psicopedagogía",
     "Telecomunicaciones"];
 
-   void showWidget(bool visibility){
+  void showWidget(bool visibility){
     print("HERE"+visibility.toString());
     if(visibility==true){
       viewVisible=true;
@@ -148,238 +148,288 @@ class _StepperBodyState extends State<StepperBody> {
 
   List<Step> steps = [
     new Step(
-        title: const Text('Información de la Cuenta'),
-        //subtitle: const Text('Enter your name'),
-        isActive: true,
-        //state: StepState.error,
-        state: StepState.indexed,
-        content:
+      title: const Text('Información de la Cuenta'),
+      //subtitle: const Text('Enter your name'),
+      isActive: true,
+      //state: StepState.error,
+      state: StepState.indexed,
+      content:
 
-        Column(
-          children: <Widget>[
-            new TextFormField(
-              focusNode: _focusNode,
-              keyboardType: TextInputType.text,
-              autocorrect: false,
-              onSaved: (String value) {
-                data.name = value;
-              },
-              maxLines: 1,
-              //initialValue: 'Aseem Wangoo',
-              validator: (value) {
-                if (value.isEmpty || value.length < 1) {
-                  return 'Por favor ingrese su nombre!';
-                }
-              },
-              decoration: new InputDecoration(
-                  labelText: 'Nombre Completo',
-                  hintText: 'Nombres y Apellidos',
-                  //filled: true,
-                  icon: const Icon(Icons.person),
-                  labelStyle:
-                  new TextStyle(decorationStyle: TextDecorationStyle.solid)),
-            ),
-            new TextFormField(
-              focusNode: _focusNode,
-              keyboardType: TextInputType.phone,
-              autocorrect: false,
-              onSaved: (String value) {
-                data.phone= value;
-              },
-              maxLines: 1,
-              //initialValue: 'Aseem Wangoo',
-              validator: (value) {
-                if (value.isEmpty || value.length < 1) {
-                  return 'Por favor ingrese su número celular';
-                }
-              },
-              decoration: new InputDecoration(
-                  labelText: 'Celular',
-                  hintText: '0999999999',
-                  //filled: true,
-                  icon: const Icon(Icons.phone_android),
-                  labelStyle:
-                  new TextStyle(decorationStyle: TextDecorationStyle.solid)),
-            ),
-            new TextFormField(
-              focusNode: _focusNode,
-              keyboardType: TextInputType.emailAddress,
-              autocorrect: false,
-              onSaved: (String value) {
-                data.email = value;
-              },
-              maxLines: 1,
-              //initialValue: 'Aseem Wangoo',
-              validator: (value) {
-                if (value.isEmpty || value.length < 1) {
-                  return 'Por favor ingrese su email';
-                }
-              },
-              decoration: new InputDecoration(
-                  labelText: 'Email',
-                  hintText: 'email@dominio.com',
-                  //filled: true,
-                  icon: const Icon(Icons.email),
-                  labelStyle:
-                  new TextStyle(decorationStyle: TextDecorationStyle.solid)),
-            ),
-            new TextFormField(
-              focusNode: _focusNode,
-              keyboardType: TextInputType.visiblePassword,
-              autocorrect: false,
-              onSaved: (String value) {
-                data.pass = value;
-              },
-              maxLines: 1,
-              //initialValue: 'Aseem Wangoo',
-              validator: (value) {
-                if (value.isEmpty || value.length < 1) {
-                  return 'Por favor ingrese su contraseña';
-                }
-              },
-              decoration: new InputDecoration(
-                  labelText: 'Contraseñan',
-                  hintText: 'Contraseña',
-                  //filled: true,
-                  icon: const Icon(Icons.vpn_key),
-                  labelStyle:
-                  new TextStyle(decorationStyle: TextDecorationStyle.solid)),
-            ),
-          ],
-        ),
-),
+      Column(
+        children: <Widget>[
+          new TextFormField(
+            focusNode: _focusNode,
+            keyboardType: TextInputType.text,
+            autocorrect: false,
+            onSaved: (String value) {
+              data.name = value;
+            },
+            maxLines: 1,
+            //initialValue: 'Aseem Wangoo',
+            validator: (value) {
+              if (value.isEmpty || value.length < 1) {
+                return 'Por favor ingrese su nombre!';
+              }
+            },
+            decoration: new InputDecoration(
+                labelText: 'Nombre Completo',
+                hintText: 'Nombres y Apellidos',
+                //filled: true,
+                icon: const Icon(Icons.person),
+                labelStyle:
+                new TextStyle(decorationStyle: TextDecorationStyle.solid)),
+          ),
+          new TextFormField(
+            focusNode: _focusNode,
+            keyboardType: TextInputType.phone,
+            autocorrect: false,
+            onSaved: (String value) {
+              data.phone= value;
+            },
+            maxLines: 1,
+            //initialValue: 'Aseem Wangoo',
+            validator: (value) {
+              if (value.isEmpty || value.length < 1) {
+                return 'Por favor ingrese su número celular';
+              }
+            },
+            decoration: new InputDecoration(
+                labelText: 'Celular',
+                hintText: '0999999999',
+                //filled: true,
+                icon: const Icon(Icons.phone_android),
+                labelStyle:
+                new TextStyle(decorationStyle: TextDecorationStyle.solid)),
+          ),
+          new TextFormField(
+            focusNode: _focusNode,
+            keyboardType: TextInputType.emailAddress,
+            autocorrect: false,
+            onSaved: (String value) {
+              data.email = value;
+            },
+            maxLines: 1,
+            //initialValue: 'Aseem Wangoo',
+            validator: (value) {
+              if (value.isEmpty || value.length < 1) {
+                return 'Por favor ingrese su email';
+              }
+            },
+            decoration: new InputDecoration(
+                labelText: 'Email',
+                hintText: 'email@dominio.com',
+                //filled: true,
+                icon: const Icon(Icons.email),
+                labelStyle:
+                new TextStyle(decorationStyle: TextDecorationStyle.solid)),
+          ),
+          new TextFormField(
+            focusNode: _focusNode,
+            keyboardType: TextInputType.visiblePassword,
+            autocorrect: false,
+            onSaved: (String value) {
+              data.pass = value;
+            },
+            maxLines: 1,
+            //initialValue: 'Aseem Wangoo',
+            validator: (value) {
+              if (value.isEmpty || value.length < 1) {
+                return 'Por favor ingrese su contraseña';
+              }
+            },
+            decoration: new InputDecoration(
+                labelText: 'Contraseñan',
+                hintText: 'Contraseña',
+                //filled: true,
+                icon: const Icon(Icons.vpn_key),
+                labelStyle:
+                new TextStyle(decorationStyle: TextDecorationStyle.solid)),
+          ),
+        ],
+      ),
+    ),
 
     new Step(
-        title: const Text('Información General'),
-        //subtitle: const Text('Subtitle'),
-        isActive: true,
-        //state: StepState.editing,
-        state: StepState.indexed,
-        content:        Column(
-          children: <Widget>[
-            new TextFormField(
-              focusNode: _focusNode,
-              keyboardType: TextInputType.text,
-              autocorrect: false,
-              onSaved: (String value) {
-                data.dni = value;
-              },
-              maxLines: 1,
-              //initialValue: 'Aseem Wangoo',
-              validator: (value) {
-                if (value.isEmpty || value.length < 1) {
-                  return 'Por favor ingrese su # de Ced!';
-                }
-              },
-              decoration: new InputDecoration(
-                  labelText: 'Cédula',
-                  hintText: '1100000000',
-                  //filled: true,
-                  icon: const Icon(Icons.credit_card),
-                  labelStyle:
-                  new TextStyle(decorationStyle: TextDecorationStyle.solid)),
-            ),
-            new TextFormField(
-              focusNode: _focusNode,
-              keyboardType: TextInputType.phone,
-              autocorrect: false,
-              onSaved: (String value) {
-                data.school= value;
-              },
-              maxLines: 1,
-              //initialValue: 'Aseem Wangoo',
-              validator: (value) {
-                if (value.isEmpty || value.length < 1) {
-                  return 'Por favor ingrese el nombre de su colegio';
-                }
-              },
-              decoration: new InputDecoration(
-                  labelText: 'Colegio o Formación mas alta',
-                  hintText: 'Colegio N o Ingeniero Civil',
-                  //filled: true,
-                  icon: const Icon(Icons.school),
-                  labelStyle:
-                  new TextStyle(decorationStyle: TextDecorationStyle.solid)),
-            ),
-            new FormField<String>(
+      title: const Text('Información General'),
+      //subtitle: const Text('Subtitle'),
+      isActive: true,
+      //state: StepState.editing,
+      state: StepState.indexed,
+      content:        Column(
+        children: <Widget>[
+          new TextFormField(
+            focusNode: _focusNode,
+            keyboardType: TextInputType.text,
+            autocorrect: false,
+            onSaved: (String value) {
+              data.dni = value;
+            },
+            maxLines: 1,
+            //initialValue: 'Aseem Wangoo',
+            validator: (value) {
+              if (value.isEmpty || value.length < 1) {
+                return 'Por favor ingrese su # de Ced!';
+              }
+            },
+            decoration: new InputDecoration(
+                labelText: 'Cédula',
+                hintText: '1100000000',
+                //filled: true,
+                icon: const Icon(Icons.credit_card),
+                labelStyle:
+                new TextStyle(decorationStyle: TextDecorationStyle.solid)),
+          ),
+          new TextFormField(
+            focusNode: _focusNode,
+            keyboardType: TextInputType.phone,
+            autocorrect: false,
+            onSaved: (String value) {
+              data.school= value;
+            },
+            maxLines: 1,
+            //initialValue: 'Aseem Wangoo',
+            validator: (value) {
+              if (value.isEmpty || value.length < 1) {
+                return 'Por favor ingrese el nombre de su colegio';
+              }
+            },
+            decoration: new InputDecoration(
+                labelText: 'Colegio o Formación mas alta',
+                hintText: 'Colegio N o Ingeniero Civil',
+                //filled: true,
+                icon: const Icon(Icons.school),
+                labelStyle:
+                new TextStyle(decorationStyle: TextDecorationStyle.solid)),
+          ),
+          new FormField<String>(
 
-              builder: (FormFieldState<String> state) {
-                return InputDecorator(
-                  decoration: InputDecoration(
-                    icon: const Icon(Icons.person),
-                    labelText: 'Genero',
-                    errorText: state.hasError ? state.errorText : null,
+            builder: (FormFieldState<String> state) {
+              return InputDecorator(
+                decoration: InputDecoration(
+                  icon: const Icon(Icons.person),
+                  labelText: 'Genero',
+                  errorText: state.hasError ? state.errorText : null,
+                ),
+                isEmpty: _genderS == '',
+                child: new DropdownButtonHideUnderline(
+                  child: new DropdownButton<String>(
+                    value: _genderS,
+                    isDense: true,
+                    onChanged: (String newValue) {
+
+                      data.gender = newValue;
+                      _genderS = newValue;
+                      state.didChange(newValue);
+
+                    },
+                    items: _genderL .map((String value) {
+                      return new DropdownMenuItem<String>(
+                        value: value,
+                        child: new Text(value),
+                      );
+                    }).toList(),
                   ),
-                  isEmpty: _genderS == '',
-                  child: new DropdownButtonHideUnderline(
-                    child: new DropdownButton<String>(
-                      value: _genderS,
-                      isDense: true,
-                      onChanged: (String newValue) {
+                ),
+              );
+            },
+            validator: (val) {
+              return val != '' ? null : 'Seleccione un género';
+            },
+          ),
+          new FormField<String>(
+            builder: (FormFieldState<String> state) {
+              return InputDecorator(
+                decoration: InputDecoration(
+                  icon: const Icon(Icons.location_city),
+                  labelText: 'Provincia de Residencia',
+                  errorText: state.hasError ? state.errorText : null,
+                ),
+                isEmpty: _provS == '',
+                child: new DropdownButtonHideUnderline(
+                  child: new DropdownButton<String>(
+                    value: _provS,
+                    isDense: true,
+                    hint: Text("Seleccione una opción"),
+                    style: TextStyle(
+                      fontSize: 10,
+                      color: Colors.white,
 
-                          data.gender = newValue;
-                          _genderS = newValue;
-                          state.didChange(newValue);
-
-                      },
-                      items: _genderL .map((String value) {
-                        return new DropdownMenuItem<String>(
-                          value: value,
-                          child: new Text(value),
-                        );
-                      }).toList(),
                     ),
+
+                    onChanged: (String newValue) {
+
+                      data.province = newValue;
+                      _provS = newValue;
+                      state.didChange(newValue);
+
+                    },
+
+                    items: _provL .map((String value) {
+                      return new DropdownMenuItem<String>(
+                        value: value,
+                        child: new Text(value),
+                      );
+                    }).toList(),
                   ),
-                );
-              },
-              validator: (val) {
-                return val != '' ? null : 'Seleccione un género';
-              },
-            ),
-            new FormField<String>(
-              builder: (FormFieldState<String> state) {
-                return InputDecorator(
-                  decoration: InputDecoration(
-                    icon: const Icon(Icons.location_city),
-                    labelText: 'Provincia de Residencia',
-                    errorText: state.hasError ? state.errorText : null,
-                  ),
-                  isEmpty: _provS == '',
-                  child: new DropdownButtonHideUnderline(
-                    child: new DropdownButton<String>(
-                      value: _provS,
-                      isDense: true,
-                      hint: Text("Seleccione una opción"),
-                      style: TextStyle(
-                        fontSize: 10,
-                        color: Colors.white,
+                ),
 
-                      ),
+              );
+            },
+            validator: (val) {
+              return val != '' ? null : 'Seleccione una provincia';
+            },
+          ),
+          new FormField<String>(
+            builder: (FormFieldState<String> state) {
+              return InputDecorator(
+                decoration: InputDecoration(
+                  icon: const Icon(Icons.book),
+                  labelText: 'Seleccione la carrera de su Interes (Prioridad)',
+                  errorText: state.hasError ? state.errorText : null,
+                ),
+                isEmpty: _carrS== '',
+                child: new DropdownButtonHideUnderline(
+                  child: new DropdownButton<String>(
+                    value: _carrS,
+                    isDense: true,
+                    hint: Text("Seleccione una opción"),
+                    style: TextStyle(
+                      fontSize: 10,
+                      color: Colors.white,
 
-                      onChanged: (String newValue) {
-
-                        data.province = newValue;
-                        _provS = newValue;
-                        state.didChange(newValue);
-
-                      },
-
-                      items: _provL .map((String value) {
-                        return new DropdownMenuItem<String>(
-                          value: value,
-                          child: new Text(value),
-                        );
-                      }).toList(),
                     ),
-                  ),
+                    onChanged: (String newValue) {
 
-                );
-              },
-              validator: (val) {
-                return val != '' ? null : 'Seleccione una provincia';
-              },
-            ),
-            new FormField<String>(
+                      data.carrera1 = newValue;
+                      _carrS = newValue;
+                      state.didChange(newValue);
+
+                    },
+                    items: _carrL .map((String value) {
+                      return new DropdownMenuItem<String>(
+                        value: value,
+                        child: new Text(value),
+                      );
+                    }).toList(),
+                  ),
+                ),
+              );
+            },
+            validator: (val) {
+              return val != '' ? null : 'Seleccione una carrera';
+            },
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              CheckboxFormField(title: Text("Hola"),initialValue: viewVisible,),
+
+            ],
+          ),
+          Visibility(
+
+            visible: viewVisible,
+            child:  new FormField<String>(
               builder: (FormFieldState<String> state) {
                 return InputDecorator(
                   decoration: InputDecoration(
@@ -387,10 +437,10 @@ class _StepperBodyState extends State<StepperBody> {
                     labelText: 'Seleccione la carrera de su Interes (Prioridad)',
                     errorText: state.hasError ? state.errorText : null,
                   ),
-                  isEmpty: _carrS== '',
+                  isEmpty: _carrS1== '',
                   child: new DropdownButtonHideUnderline(
                     child: new DropdownButton<String>(
-                      value: _carrS,
+                      value: _carrS1,
                       isDense: true,
                       hint: Text("Seleccione una opción"),
                       style: TextStyle(
@@ -400,8 +450,8 @@ class _StepperBodyState extends State<StepperBody> {
                       ),
                       onChanged: (String newValue) {
 
-                        data.carrera1 = newValue;
-                        _carrS = newValue;
+                        data.carrera2 = newValue;
+                        _carrS1 = newValue;
                         state.didChange(newValue);
 
                       },
@@ -419,59 +469,9 @@ class _StepperBodyState extends State<StepperBody> {
                 return val != '' ? null : 'Seleccione una carrera';
               },
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                CheckboxFormField(title: Text("Hola"),initialValue: viewVisible,),
-
-              ],
-            ),
-            Visibility(
-
-                visible: viewVisible,
-                child:  new FormField<String>(
-                  builder: (FormFieldState<String> state) {
-                    return InputDecorator(
-                      decoration: InputDecoration(
-                        icon: const Icon(Icons.book),
-                        labelText: 'Seleccione la carrera de su Interes (Prioridad)',
-                        errorText: state.hasError ? state.errorText : null,
-                      ),
-                      isEmpty: _carrS1== '',
-                      child: new DropdownButtonHideUnderline(
-                        child: new DropdownButton<String>(
-                          value: _carrS1,
-                          isDense: true,
-                          hint: Text("Seleccione una opción"),
-                          style: TextStyle(
-                            fontSize: 10,
-                            color: Colors.white,
-
-                          ),
-                          onChanged: (String newValue) {
-
-                            data.carrera2 = newValue;
-                            _carrS1 = newValue;
-                            state.didChange(newValue);
-
-                          },
-                          items: _carrL .map((String value) {
-                            return new DropdownMenuItem<String>(
-                              value: value,
-                              child: new Text(value),
-                            );
-                          }).toList(),
-                        ),
-                      ),
-                    );
-                  },
-                  validator: (val) {
-                    return val != '' ? null : 'Seleccione una carrera';
-                  },
-                ),
-            ),
-          ],
-        ),),
+          ),
+        ],
+      ),),
 
 
     // new Step(
@@ -502,7 +502,7 @@ class _StepperBodyState extends State<StepperBody> {
         print("Phone: ${data.phone}");
         print("Email: ${data.email}");
         print("Age: ${data.carrera1}");
-        _signUp(fullName: data.name,email: data.email,cellphone: data.phone,gender: data.gender,dni: data.dni,province: data.province,academic: data.school,carrera1: data.carrera1,carrera2: data.carrera2,password: data.pass);
+        _signUp(fullName: data.name,email: data.email,cellphone: data.phone,gender: data.gender,dni: data.dni,province: data.province,academic: data.school,carrera1: data.carrera1,carrera2: data.carrera2,password:data.pass);
       }
     }
 
@@ -562,39 +562,39 @@ class _StepperBodyState extends State<StepperBody> {
   }
   void _signUp(
       {   String userID,
-      String fullName,
-      String email,
-      String password,
-      String cellphone,
-      String dni,
-      String gender,
-      String province,
-      String academic,
-       String carrera1,
-      String carrera2,
+        String fullName,
+        String email,
+        String password,
+        String cellphone,
+        String dni,
+        String gender,
+        String province,
+        String academic,
+        String carrera1,
+        String carrera2,
         BuildContext context}) async {
 
-      try {
-        SystemChannels.textInput.invokeMethod('TextInput.hide');
-        await AuthService.signUp(email, password).then((uID) {
-          AuthService.addUser(new User(
-              userID: uID,
-              email: email,
-              fullName: fullName,
-              cellphone:cellphone,
-              dni:dni,
-              gender:gender,
-            province:province,
-            academic:academic,
-            carrera1:carrera1,
-            carrera2:carrera2,
-          ));
-        });
-      } catch (e) {
-        print("Fallo el Registro: $e");
+    try {
+      SystemChannels.textInput.invokeMethod('TextInput.hide');
+      await AuthService.signUp(email, password).then((uID) {
+        AuthService.addUser(new User(
+          userID: uID,
+          email: email,
+          fullName: fullName,
+          cellphone:cellphone,
+          dni:dni,
+          gender:gender,
+          province:province,
+          academic:academic,
+          carrera1:carrera1,
+          carrera2:carrera2,
+        ));
+      });
+    } catch (e) {
+      print("Fallo el Registro: $e");
 
-      }
     }
+  }
 
 
 
