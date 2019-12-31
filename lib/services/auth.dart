@@ -62,6 +62,7 @@ class AuthService {
   static Future<String> signUp(String email, String password) async {
     FirebaseUser user = await FirebaseAuth.instance
         .createUserWithEmailAndPassword(email: email, password: password);
+
     return user.uid;
   }
   static Future<FirebaseUser> getCurrentFirebaseUser() async {
@@ -86,6 +87,32 @@ class AuthService {
     bool exists = false;
     try {
       await Firestore.instance.document("users/$userID").get().then((doc) {
+        if (doc.exists)
+          exists = true;
+        else
+          exists = false;
+      });
+      return exists;
+    } catch (e) {
+      return false;
+    }
+  }
+  static Stream<User> getUserData(String userID) {
+    return Firestore.instance
+        .collection("users")
+        .where("userID", isEqualTo: userID)
+        .snapshots()
+        .map((QuerySnapshot snapshot) {
+      return snapshot.documents.map((doc) {
+        return User.fromDocument(doc);
+      }).first;
+    });
+  }
+
+  static Future<bool> checkInscription(String dni) async {
+    bool exists = false;
+    try {
+      await Firestore.instance.document("inscritos/$dni").get().then((doc) {
         if (doc.exists)
           exists = true;
         else

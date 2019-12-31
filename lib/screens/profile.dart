@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../services/services.dart';
@@ -6,18 +7,28 @@ import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatelessWidget {
   final AuthService auth = AuthService();
-
+  static String name="";
   @override
   Widget build(BuildContext context) {
-    Report report = Provider.of<Report>(context);
+    //Report report = Provider.of<Report>(context);
     FirebaseUser user = Provider.of<FirebaseUser>(context);
+    Stream<User> a=getUserData(user.uid);
+
+    final subscription = a.listen(null);
+    subscription.onData((event) {  // Update onData after listening.
+      name=event.fullName;
+      print(name);
+
+      subscription.cancel();
+      });
+
 
     if (user != null) {
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.deepOrange,
-        title: Text(user.displayName ?? 'Guest'),
+        title: Text(name?? 'Guest'),
       ),
       body: Center(
         child: Column(
@@ -38,9 +49,11 @@ class ProfileScreen extends StatelessWidget {
               ),
             Text(user.email ?? '', style: Theme.of(context).textTheme.headline),
             Spacer(),
+            /**
             if (report != null)
               Text('${report.total ?? 0}',
                   style: Theme.of(context).textTheme.display3),
+                */
             Text('Quizzes Completed',
                 style: Theme.of(context).textTheme.subhead),
             Spacer(),
@@ -61,5 +74,15 @@ class ProfileScreen extends StatelessWidget {
       return LoadingScreen();
     }
   }
-
+  static Stream<User> getUserData(String userID) {
+    return Firestore.instance
+        .collection("users")
+        .where("userID", isEqualTo: userID)
+        .snapshots()
+        .map((QuerySnapshot snapshot) {
+      return snapshot.documents.map((doc) {
+        return User.fromDocument(doc);
+      }).first;
+    });
+  }
 }
