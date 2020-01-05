@@ -1,22 +1,24 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class LeaderboardScreen extends StatelessWidget {
+class LeaderBoard extends StatefulWidget {
+  @override
+  _LeaderBoardState createState() => _LeaderBoardState();
+}
+
+class _LeaderBoardState extends State<LeaderBoard> {
+
+  int i = 0;
+  Color my = Colors.brown, CheckMyColor = Colors.white;
 
   @override
   Widget build(BuildContext context) {
     var r = TextStyle(color: Colors.purpleAccent, fontSize: 34);
-    int i = 0;
-    Color my = Colors.brown, CheckMyColor = Colors.white;
     return Stack(
       children: <Widget>[
         Scaffold(
-            appBar: AppBar(
-              backgroundColor: Colors.lightGreen,
-              title: Text("LeaderBoard"),
-            ),
             body: Container(
-              margin: EdgeInsets.only(top: 25.0),
+              margin: EdgeInsets.only(top: 65.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -24,14 +26,14 @@ class LeaderboardScreen extends StatelessWidget {
                     margin: EdgeInsets.only(left: 15.0, top: 10.0),
                     child: RichText(
                         text: TextSpan(
-                            text: "Clasificación",
+                            text: "Leader",
                             style: TextStyle(
                                 color: Colors.deepPurple,
                                 fontSize: 30.0,
                                 fontWeight: FontWeight.bold),
                             children: [
                               TextSpan(
-                                  text: " General",
+                                  text: " Board",
                                   style: TextStyle(
                                       color: Colors.pink,
                                       fontSize: 30.0,
@@ -39,10 +41,17 @@ class LeaderboardScreen extends StatelessWidget {
                             ])),
                   ),
 
+                  Padding(
+                    padding: EdgeInsets.only(left: 15.0),
+                    child: Text(
+                      'Global Rank Board: ',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ),
                   Flexible(
                       child: StreamBuilder<QuerySnapshot>(
                           stream: Firestore.instance
-                              .collection('leaderboard')
+                              .collection('users')
                               .where('class', isEqualTo: '12')
                               .orderBy('MyPoints', descending: true)
                               .snapshots(),
@@ -158,7 +167,24 @@ class LeaderboardScreen extends StatelessWidget {
                                                     style: r,
                                                   )
                                                       : Text(''),
-
+                                                  Padding(
+                                                    padding: EdgeInsets.only(
+                                                        left: 20.0,
+                                                        top: 13.0,
+                                                        right: 20.0),
+                                                    child: RaisedButton(
+                                                      onPressed: () {
+                                                      },
+                                                      child: Text(
+                                                        "Challenge",
+                                                        style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontWeight:
+                                                            FontWeight.bold),
+                                                      ),
+                                                      color: Colors.deepPurple,
+                                                    ),
+                                                  ),
                                                 ],
                                               ),
                                             ],
