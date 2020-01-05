@@ -1,4 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:async';
@@ -70,13 +74,14 @@ class AuthService {
     return user;
   }
 
-  static void addUser(User user) async {
+  static void addUser(User user,BuildContext context) async {
     checkUserExist(user.userID).then((value) {
       if (!value) {
         print("user ${user.fullName} ${user.email} added");
         Firestore.instance
             .document("users/${user.userID}")
             .setData(user.toJson());
+        Navigator.of(context).pushNamed('/general');
       } else {
         print("user ${user.fullName} ${user.email} exists");
       }
@@ -123,6 +128,50 @@ class AuthService {
       return false;
     }
   }
+
+  static String getExceptionText(Exception e) {
+    if (e is PlatformException) {
+      switch (e.message) {
+        case 'There is no user record corresponding to this identifier. The user may have been deleted.':
+          return 'User with this e-mail not found.';
+          break;
+        case 'The password is invalid or the user does not have a password.':
+          return 'Invalid password.';
+          break;
+        case 'A network error (such as timeout, interrupted connection or unreachable host) has occurred.':
+          return 'No internet connection.';
+          break;
+        case 'The email address is already in use by another account.':
+          return 'Email address is already taken.';
+          break;
+        default:
+          return 'Unknown error occured.';
+      }
+    } else {
+      return 'Unknown error occured.';
+    }
+  }
+
+  void initiateFacebookLogin() async {
+    var facebookLogin = FacebookLogin();
+    var facebookLoginResult =
+    await facebookLogin.logInWithReadPermissions(['email']);
+    switch (facebookLoginResult.status) {
+      case FacebookLoginStatus.error:
+        print("Error");
+
+        break;
+      case FacebookLoginStatus.cancelledByUser:
+        print("CancelledByUser");
+
+        break;
+      case FacebookLoginStatus.loggedIn:
+        print("LoggedIn");
+
+        break;
+    }
+  }
+
 }
 
 // keytool -list -v -alias androiddebugkey -keystore %USERPROFILE%\.android\debug.keystore

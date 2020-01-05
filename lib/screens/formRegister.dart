@@ -11,14 +11,14 @@ class RegisterScreen extends StatefulWidget {
 
 class RegisterScreenState extends State<RegisterScreen> {
   AuthService auth = AuthService();
-
+  static BuildContext context1;
   @override
   void initState() {
     super.initState();
     auth.getUser.then(
           (user) {
         if (user != null) {
-          Navigator.pushReplacementNamed(context, '/topics');
+          Navigator.pushReplacementNamed(context, '/general');
         }
       },
     );
@@ -158,7 +158,7 @@ class _StepperBodyState extends State<StepperBody> {
       Column(
         children: <Widget>[
           new TextFormField(
-            focusNode: _focusNode,
+
             keyboardType: TextInputType.text,
             autocorrect: false,
             onSaved: (String value) {
@@ -180,7 +180,7 @@ class _StepperBodyState extends State<StepperBody> {
                 new TextStyle(decorationStyle: TextDecorationStyle.solid)),
           ),
           new TextFormField(
-            focusNode: _focusNode,
+
             keyboardType: TextInputType.phone,
             autocorrect: false,
             onSaved: (String value) {
@@ -202,7 +202,7 @@ class _StepperBodyState extends State<StepperBody> {
                 new TextStyle(decorationStyle: TextDecorationStyle.solid)),
           ),
           new TextFormField(
-            focusNode: _focusNode,
+
             keyboardType: TextInputType.emailAddress,
             autocorrect: false,
             onSaved: (String value) {
@@ -224,7 +224,7 @@ class _StepperBodyState extends State<StepperBody> {
                 new TextStyle(decorationStyle: TextDecorationStyle.solid)),
           ),
           new TextFormField(
-            focusNode: _focusNode,
+
             keyboardType: TextInputType.visiblePassword,
             autocorrect: false,
             onSaved: (String value) {
@@ -258,7 +258,7 @@ class _StepperBodyState extends State<StepperBody> {
       content:        Column(
         children: <Widget>[
           new TextFormField(
-            focusNode: _focusNode,
+
             keyboardType: TextInputType.text,
             autocorrect: false,
             onSaved: (String value) {
@@ -280,8 +280,8 @@ class _StepperBodyState extends State<StepperBody> {
                 new TextStyle(decorationStyle: TextDecorationStyle.solid)),
           ),
           new TextFormField(
-            focusNode: _focusNode,
-            keyboardType: TextInputType.phone,
+
+            keyboardType: TextInputType.text,
             autocorrect: false,
             onSaved: (String value) {
               data.school= value;
@@ -296,6 +296,7 @@ class _StepperBodyState extends State<StepperBody> {
             decoration: new InputDecoration(
                 labelText: 'Colegio o Formación mas alta',
                 hintText: 'Colegio N o Ingeniero Civil',
+
                 //filled: true,
                 icon: const Icon(Icons.school),
                 labelStyle:
@@ -422,7 +423,7 @@ class _StepperBodyState extends State<StepperBody> {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              CheckboxFormField(title: Text("Hola"),initialValue: viewVisible,),
+              CheckboxFormField(title: Text("Hola"),initialValue: viewVisible,action: viewVisible=true,),
 
             ],
           ),
@@ -484,6 +485,7 @@ class _StepperBodyState extends State<StepperBody> {
 
   @override
   Widget build(BuildContext context) {
+
     void showSnackBarMessage(String message,
         [MaterialColor color = Colors.red]) {
       Scaffold
@@ -572,11 +574,12 @@ class _StepperBodyState extends State<StepperBody> {
         String academic,
         String carrera1,
         String carrera2,
-        BuildContext context}) async {
+        context}) async {
 
     try {
       SystemChannels.textInput.invokeMethod('TextInput.hide');
       await AuthService.signUp(email, password).then((uID) {
+
         AuthService.addUser(new User(
           userID: uID,
           email: email,
@@ -588,8 +591,10 @@ class _StepperBodyState extends State<StepperBody> {
           academic:academic,
           carrera1:carrera1,
           carrera2:carrera2,
-        ));
-      });
+        ),context);
+      }
+      );
+
     } catch (e) {
       print("Fallo el Registro: $e");
 

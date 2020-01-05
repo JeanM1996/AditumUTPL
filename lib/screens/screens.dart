@@ -6,3 +6,4 @@ export 'about.dart';
 export 'general.dart';
 export 'leaderboard.dart';
 export 'formRegister.dart';
+export 'signin.dart';

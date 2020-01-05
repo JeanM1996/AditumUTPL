@@ -16,11 +16,13 @@ class LoginScreenState extends State<LoginScreen> {
     auth.getUser.then(
       (user) {
         if (user != null) {
-          Navigator.pushReplacementNamed(context, '/topics');
+          Navigator.pushReplacementNamed(context, '/general');
         }
       },
     );
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -46,13 +48,23 @@ class LoginScreenState extends State<LoginScreen> {
               icon: FontAwesomeIcons.userPlus,
               color: Colors.black45,
             ),
+            SignButton(
+              text: 'Iniciar Sesión',
+              icon: FontAwesomeIcons.doorOpen,
+              color: Colors.black45,
+            ),
+
             LoginButton(
               text: 'Ingresar con Google',
               icon: FontAwesomeIcons.google,
               color: Colors.black45,
               loginMethod: auth.googleSignIn,
             ),
-            LoginButton(text: 'Continue as Guest', loginMethod: auth.anonLogin)
+            FbButton(
+              text: 'Iniciar Sesión con Facebook',
+              icon: FontAwesomeIcons.facebook,
+              color: Colors.black45,
+            ),
           ],
         ),
       ),
@@ -120,4 +132,63 @@ Widget build(BuildContext context) {
     ),
   );
 }
+}
+
+class SignButton extends StatelessWidget {
+  final Color color;
+  final IconData icon;
+  final String text;
+
+
+  const SignButton(
+      {Key key, this.text, this.icon, this.color})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(bottom: 10),
+      child: FlatButton.icon(
+        padding: EdgeInsets.all(30),
+        icon: Icon(icon, color: Colors.white),
+        color: color,
+        onPressed: () async {
+          Navigator.pushReplacementNamed(context, '/sign');
+
+        },
+        label: Expanded(
+          child: Text('$text', textAlign: TextAlign.center),
+        ),
+      ),
+    );
+  }
+
+
+}
+
+class FbButton extends StatelessWidget {
+  final Color color;
+  final IconData icon;
+  final String text;
+
+
+  const FbButton(
+      {Key key, this.text, this.icon, this.color})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(bottom: 10),
+      child: FlatButton.icon(
+        padding: EdgeInsets.all(30),
+        icon: Icon(icon, color: Colors.white),
+        color: color,
+        onPressed: (){} ,
+        label: Expanded(
+          child: Text('$text', textAlign: TextAlign.center),
+        ),
+      ),
+    );
+  }
 }
