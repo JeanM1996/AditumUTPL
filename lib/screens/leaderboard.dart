@@ -99,12 +99,7 @@ class LeaderboardScreen extends StatelessWidget {
                                                                     shape: BoxShape
                                                                         .circle,
                                                                     image: DecorationImage(
-                                                                        image: NetworkImage(snapshot
-                                                                            .data
-                                                                            .documents[
-                                                                        index]
-                                                                            .data[
-                                                                        'photoUrl']),
+                                                                        image: NetworkImage("https://huntpng.com/images650/avatar-icon-png-17.png"),
                                                                         fit: BoxFit
                                                                             .fill)))),
                                                       ],

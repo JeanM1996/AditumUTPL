@@ -7,7 +7,13 @@ import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatelessWidget {
   final AuthService auth = AuthService();
-  static String name="";
+  static String name="Obteniendo Datos";
+  static String city="Obteniendo Datos";
+  static String phone="Obteniendo Datos";
+  static String academic="Obteniendo Datos";
+  static String dni="Obteniendo Datos";
+  static String _carrP= '';
+  List<String> _carrL = <String>[];
   @override
   Widget build(BuildContext context) {
     //Report report = Provider.of<Report>(context);
@@ -17,6 +23,12 @@ class ProfileScreen extends StatelessWidget {
     final subscription = a.listen(null);
     subscription.onData((event) {  // Update onData after listening.
       name=event.fullName;
+      dni=event.dni;
+      city=event.province;
+      academic=event.academic;
+      _carrP=event.carrera1;
+      _carrL.add(event.carrera1);
+      _carrL.add(event.carrera2);
       print(name);
 
       subscription.cancel();
@@ -47,18 +59,128 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ),
               ),
-            Text(user.email ?? '', style: Theme.of(context).textTheme.headline),
+
             Spacer(),
             /**
             if (report != null)
               Text('${report.total ?? 0}',
                   style: Theme.of(context).textTheme.display3),
                 */
-            Text('Quizzes Completed',
-                style: Theme.of(context).textTheme.subhead),
+            Center(child:Text("Datos del Usuario",style: TextStyle(fontWeight: FontWeight.bold),),),
+            Spacer(),
+            Container(padding: EdgeInsets.all(30),
+            child: Column(crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+
+                SafeArea(child:
+                Row(children: <Widget>[
+                  Text("Cedula: "),
+                  new Flexible(
+                    child: new Container(
+                      padding: new EdgeInsets.only(right: 13.0),
+                      child: new Text(
+                        dni,
+                        overflow: TextOverflow.ellipsis,
+                        style: new TextStyle(
+                          fontSize: 20.0,
+                          fontFamily: 'Roboto',
+                          color: Colors.lightBlue,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ]) ,),
+                SafeArea(child:
+                Row(children: <Widget>[
+                Text("Email: "),
+                  new Flexible(
+                    child: new Container(
+                      padding: new EdgeInsets.only(right: 13.0),
+                      child: new Text(
+                        user.email,
+                        overflow: TextOverflow.ellipsis,
+                        style: new TextStyle(
+                          fontSize: 20.0,
+                          fontFamily: 'Roboto',
+                          color: Colors.lightBlue,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+              ]) ,),
+                SafeArea(child:
+                Row(children: <Widget>[
+                Text("Provincia: "),
+                  new Flexible(
+                    child: new Container(
+                      padding: new EdgeInsets.only(right: 13.0),
+                      child: new Text(
+                        city,
+                        overflow: TextOverflow.ellipsis,
+                        style: new TextStyle(
+                          fontSize: 20.0,
+                          fontFamily: 'Roboto',
+                          color: Colors.lightBlue,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+              ]) ,),
+                SafeArea(child:
+                Row(children: <Widget>[
+                Text("Form Acad: "),
+                  new Flexible(
+                    child: new Container(
+                      padding: new EdgeInsets.only(right: 13.0),
+                      child: new Text(
+                        academic,
+                        overflow: TextOverflow.ellipsis,
+                        style: new TextStyle(
+                          fontSize: 20.0,
+                          fontFamily: 'Roboto',
+                          color: Colors.lightBlue,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+              ]) ,),
+                SafeArea(child:
+                Row(children: <Widget>[
+                  Text("Carrera Prioritaria: "),
+                  new DropdownButtonHideUnderline(
+                    child: new DropdownButton<String>(
+                      value: _carrP,
+                      isDense: true,
+                      style: TextStyle(
+                        fontSize: 15,
+                        color:  Colors.lightBlue,
+
+                      ),
+                      onChanged: (String newValue) {
+
+
+                        _carrP= newValue;
+
+                      },
+                      items: _carrL .map((String value) {
+                        return new DropdownMenuItem<String>(
+                          value: value,
+                          child: new Text(value),
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                ]) ,)]),),
+
+
             Spacer(),
             FlatButton(
-                child: Text('logout'),
+                child: Text('Cerrar Sesión'),
                 color: Colors.red,
                 onPressed: () async {
                   await auth.signOut();

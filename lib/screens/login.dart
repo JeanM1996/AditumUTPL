@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../shared/shared.dart';
@@ -93,7 +94,17 @@ class LoginButton extends StatelessWidget {
         onPressed: () async {
           var user = await loginMethod();
           if (user != null) {
-            Navigator.pushReplacementNamed(context, '/general');
+            String uid;
+
+            AuthService.checkUserExist(uid).then((value) {
+              if (!value) {
+
+                Navigator.pushReplacementNamed(context, '/formU');
+              } else {
+                Navigator.of(context).pushNamed('/general');
+              }
+            });
+
           }
         },
         label: Expanded(

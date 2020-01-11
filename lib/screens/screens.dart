@@ -7,3 +7,4 @@ export 'general.dart';
 export 'leaderboard.dart';
 export 'formRegister.dart';
 export 'signin.dart';
+export 'formUserData.dart';
