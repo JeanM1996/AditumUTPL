@@ -41,6 +41,8 @@ dependencies:
   flutter_webview_plugin: 0.3.0+2
   webview_flutter: 0.2.0
   conditional: ^0.0.1
+  edge_alert: ^0.0.1
+
 
 dev_dependencies:
   flutter_test:

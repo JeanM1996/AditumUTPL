@@ -114,18 +114,13 @@ class AuthService {
     });
   }
 
-  static Future<bool> checkInscription(String uid) async {
-    Stream<User>u=getUserData(uid);
-    String dni="";
-    final subscription = u.listen(null);
-    subscription.onData((event) {  // Update onData after listening.
-      dni=event.dni;
-      subscription.cancel();
-    });
+  static Future<bool> checkInscription(String dni) async {
+
+    print("dni:"+dni);
     bool exists = false;
 
     try {
-      await Firestore.instance.document("inscritos/$dni").get().then((doc) {
+      await Firestore.instance.collection("inscritos").document(dni).get().then((doc) {
         print(doc.data);
         if (doc.exists)
           exists = true;
@@ -133,6 +128,7 @@ class AuthService {
         else
           exists = false;
       });
+      print(exists);
       return exists;
     } catch (e) {
       return false;

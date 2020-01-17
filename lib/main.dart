@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
           '/formU':(context)=>UserDScreen(),
           '/register': (context) => RegisterScreen(),
           '/topics': (context) => TopicsScreen(),
-          '/general': (context) => GeneralScreen(),
+          '/general': (context) => PrincipalScreen(),
           '/profile': (context) => ProfileScreen(),
           '/about': (context) => AboutScreen(),
           '/leaderboard': (context) => LeaderboardScreen(),
