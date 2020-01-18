@@ -20,6 +20,7 @@ class PrincipalScreenState extends State<PrincipalScreen> {
   AuthService auth = AuthService();
   String uid;
   bool inscrito=false;
+  int ready=0;
   @override
   void initState() {
     super.initState();
@@ -63,7 +64,7 @@ class PrincipalScreenState extends State<PrincipalScreen> {
             stream: AuthService.getUserData(uid),
             builder: (context, snappShot) {
 
-              if (snappShot != null && snappShot.hasData) {
+              if (snappShot != null && snappShot.hasData ) {
                 String dni=snappShot.data.dni;
                 print(dni);
                 Future<bool>futureB=AuthService.checkInscription(dni);
@@ -71,11 +72,10 @@ class PrincipalScreenState extends State<PrincipalScreen> {
 
 
                     futureB.then((val) {
-                      EdgeAlert.show(context, title: 'Construyendo el Menu\nEspera', description: 'Estamos alistando todo para que tu experiencia sea UNICA', gravity: EdgeAlert.BOTTOM,duration: 10,icon: FontAwesomeIcons.puzzlePiece,backgroundColor: Colors.lightGreen);
 
                       print(val);
                   inscrito=val;
-
+                  ready=1;
                 });
 
                 return Conditional(

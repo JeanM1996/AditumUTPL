@@ -9,3 +9,4 @@ export 'formRegister.dart';
 export 'signin.dart';
 export 'formUserData.dart';
 export 'usermenu.dart';
+export 'profile2.dart';
