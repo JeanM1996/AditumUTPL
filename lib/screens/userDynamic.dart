@@ -9,31 +9,39 @@ import 'package:quizapp/styles/resource.dart';
 import '../shared/shared.dart';
 import '../services/services.dart';
 import 'package:edge_alert/edge_alert.dart';
-import 'package:toast/toast.dart';
 
 import 'general.dart';
 
-class PrincipalScreen extends StatefulWidget {
-  createState() => PrincipalScreenState();
+class PrincipalDScreen extends StatefulWidget {
+  createState() => PrincipalDScreenState();
 }
 
-class PrincipalScreenState extends State<PrincipalScreen> {
+class PrincipalDScreenState extends State<PrincipalDScreen> {
   AuthService auth = AuthService();
   String uid;
   bool inscrito=false;
-  int ready=0;
+
   @override
   void initState()  {
     super.initState();
-
     auth.getUser.then(
           (user) {
         if (user != null) {
-
           uid=user.uid;
 
         }
+       Stream<User> userData=AuthService.getUserData(uid);
+        Future<User> userSession= userData.first;
+        userSession.then((val) {
+          Future<bool>futureB=AuthService.checkInscription(val.dni);
+          futureB.then((val) {
 
+            print(val);
+
+            inscrito=val;
+
+          });
+        });
 
       },
     );
@@ -43,7 +51,12 @@ class PrincipalScreenState extends State<PrincipalScreen> {
 
   @override
   Widget build(BuildContext context) {
-
+    void showSnackBarMessage(String message,
+        [MaterialColor color = Colors.red]) {
+      Scaffold
+          .of(context)
+          .showSnackBar(new SnackBar(content: new Text(message)));
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -59,29 +72,7 @@ class PrincipalScreenState extends State<PrincipalScreen> {
       ),
 
       body:SingleChildScrollView(
-
-        child:StreamBuilder<User> (
-            stream: AuthService.getUserData(uid),
-            builder: (context, snappShot) {
-
-              if (snappShot != null && snappShot.hasData ) {
-                String dni=snappShot.data.dni;
-
-                print(dni);
-
-
-                Future<bool>futureB=AuthService.checkInscription(dni);
-
-
-
-                    futureB.then((val)  {
-                      EdgeAlert.show(context, title: 'Construyendo el Menu\nEspera', description: 'Estamos alistando todo para que tu experiencia sea UNICA', gravity: EdgeAlert.BOTTOM,duration: 10,icon: FontAwesomeIcons.puzzlePiece,backgroundColor: Colors.lightGreen);
-                      print(val);
-                  inscrito=val;
-                  ready=1;
-                });
-
-                return Conditional(
+        child:Conditional(
 
                     condition:inscrito,
                     onConditionTrue: Center(
@@ -403,18 +394,7 @@ class PrincipalScreenState extends State<PrincipalScreen> {
                                       ),
                                     ),
                                   ),),])))
-                );
-
-              }
-                return LoadingScreen();
-
-
-              // Hasta que se reciba información valida mostramos un spinner de espera
-
-            }),
-
-
-      ),
+    ),)
 
 
 
@@ -422,8 +402,7 @@ class PrincipalScreenState extends State<PrincipalScreen> {
 
 
 
-
-      bottomNavigationBar: AppBottomNav(),
+      ,bottomNavigationBar: AppBottomNav(),
     );
   }
 

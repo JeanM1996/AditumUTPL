@@ -42,7 +42,9 @@ dependencies:
   webview_flutter: 0.2.0
   conditional: ^0.0.1
   edge_alert: ^0.0.1
-
+  progress_indicators: ^0.1.4
+  loading_indicator_view: ^1.1.0
+  toast: ^0.1.5
 
 dev_dependencies:
   flutter_test:
