@@ -114,10 +114,22 @@ class AuthService {
     });
   }
 
+  static Future<String> getDni(String uid) async {
+    var document =
+    Firestore.instance.collection("users").document(uid).get();
+    return await document.then((doc) {
+
+      return User.fromDocument(doc).dni;
+    });
+  }
+
+
   static Future<bool> checkInscription(String dni) async {
+    bool exists = false;
+
 
     print("dni:"+dni);
-    bool exists = false;
+
 
     try {
       await Firestore.instance.collection("inscritos").document(dni).get().then((doc) {

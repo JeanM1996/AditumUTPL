@@ -42,9 +42,8 @@ dependencies:
   webview_flutter: 0.2.0
   conditional: ^0.0.1
   edge_alert: ^0.0.1
-  progress_indicators: ^0.1.4
-  loading_indicator_view: ^1.1.0
-  toast: ^0.1.5
+  condition: ^0.0.7
+
 
 dev_dependencies:
   flutter_test:
@@ -60,6 +59,9 @@ flutter:
     - assets/
     - assets/covers/
     - assets/congrats.gif
+    - assets/Junior.png
+    - assets/Senior.png
+    - assets/Profesional.png
     
 
   # The following line ensures that the Material Icons font is

@@ -547,6 +547,7 @@ class _StepperBodyUState extends State<StepperBodyU> {
           carrera1: carrera1,
           carrera2: carrera2,
         ), context);
+        Navigator.of(context).pushNamed('/general');
       });
 
     } catch (e) {

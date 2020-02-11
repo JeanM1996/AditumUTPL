@@ -10,4 +10,3 @@ export 'signin.dart';
 export 'formUserData.dart';
 export 'usermenu.dart';
 export 'profile2.dart';
-export 'userDynamic.dart';

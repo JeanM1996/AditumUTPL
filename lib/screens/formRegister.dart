@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:quizapp/screens/general.dart';
+import 'package:quizapp/screens/screens.dart';
 import 'package:quizapp/shared/CheckboxFormField.dart';
 import '../shared/shared.dart';
 import '../services/services.dart';
@@ -11,6 +13,7 @@ class RegisterScreen extends StatefulWidget {
 
 class RegisterScreenState extends State<RegisterScreen> {
   AuthService auth = AuthService();
+
   static BuildContext context1;
   @override
   void initState() {
@@ -57,6 +60,7 @@ class StepperBody extends StatefulWidget {
 }
 
 class _StepperBodyState extends State<StepperBody> {
+
   int currStep = 0;
   static String _genderS = '';
   static var _focusNode = new FocusNode();
@@ -553,7 +557,7 @@ class _StepperBodyState extends State<StepperBody> {
             ),
             new RaisedButton(
               child: new Text(
-                'Save details',
+                'Guardar',
                 style: new TextStyle(color: Colors.white),
               ),
               onPressed: _submitDetails,
@@ -592,6 +596,12 @@ class _StepperBodyState extends State<StepperBody> {
           carrera1:carrera1,
           carrera2:carrera2,
         ),context);
+
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => PrincipalScreen()));
+
       }
       );
 

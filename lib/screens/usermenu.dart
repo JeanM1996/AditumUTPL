@@ -4,46 +4,49 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:quizapp/screens/quiz.dart';
 import 'package:quizapp/shared/PureInkWell.dart';
 import 'package:quizapp/styles/resource.dart';
 import '../shared/shared.dart';
 import '../services/services.dart';
 import 'package:edge_alert/edge_alert.dart';
-import 'package:toast/toast.dart';
 
 import 'general.dart';
 
-class PrincipalScreen extends StatefulWidget {
-  createState() => PrincipalScreenState();
-}
 
-class PrincipalScreenState extends State<PrincipalScreen> {
-  AuthService auth = AuthService();
-  String uid;
-  bool inscrito=false;
-  int ready=0;
+
+
+
+class PrincipalScreen extends StatelessWidget {
+  static String uid,dni;
+  static bool inscrito=false;
+
+
   @override
-  void initState()  {
-    super.initState();
 
-    auth.getUser.then(
-          (user) {
-        if (user != null) {
-
-          uid=user.uid;
-
-        }
-
-
-      },
-    );
-  }
 
 
 
   @override
   Widget build(BuildContext context) {
+    if(inscrito==false||uid==null){
+      AuthService.getCurrentFirebaseUser().then((result) {
+        print(result);
+        uid=result.uid;
+        print(uid);
+      });
+      AuthService.getDni(uid).then((result0) {
+        print("Dni call:"+result0);
+        dni=result0;
+        AuthService.checkInscription(dni).then((result1) {
+          print("Valorcall call:"+result1.toString());
+          inscrito=result1;
+        });
+      });
 
+
+
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -59,30 +62,7 @@ class PrincipalScreenState extends State<PrincipalScreen> {
       ),
 
       body:SingleChildScrollView(
-
-        child:StreamBuilder<User> (
-            stream: AuthService.getUserData(uid),
-            builder: (context, snappShot) {
-
-              if (snappShot != null && snappShot.hasData ) {
-                String dni=snappShot.data.dni;
-
-                print(dni);
-
-
-                Future<bool>futureB=AuthService.checkInscription(dni);
-
-
-
-                    futureB.then((val)  {
-                      EdgeAlert.show(context, title: 'Construyendo el Menu\nEspera', description: 'Estamos alistando todo para que tu experiencia sea UNICA', gravity: EdgeAlert.BOTTOM,duration: 10,icon: FontAwesomeIcons.puzzlePiece,backgroundColor: Colors.lightGreen);
-                      print(val);
-                  inscrito=val;
-                  ready=1;
-                });
-
-                return Conditional(
-
+        child:Conditional(
                     condition:inscrito,
                     onConditionTrue: Center(
                       child: Container(
@@ -99,9 +79,9 @@ class PrincipalScreenState extends State<PrincipalScreen> {
                                         title: const Text('Modo de Juego Junior consiste en .... .'),
                                         actions: <Widget>[
                                           CupertinoDialogAction(
-                                            child: const Text('ok'),
+                                            child: const Text('Jugar'),
                                             onPressed: () {
-                                              Navigator.pop(context, 'ok');
+                                              Navigator.pop(context, QuizScreen());
                                             },
                                           ),
                                         ],
@@ -116,7 +96,7 @@ class PrincipalScreenState extends State<PrincipalScreen> {
                                         fit: StackFit.passthrough,
                                         children: <Widget>[
                                           FittedBox(
-                                            child: Image.network("http://nextrestaurants.com/wp-content/uploads/2019/07/Restaurants-TriviaNights-Marketing-1024x576.png"),
+                                            child: Image.asset('assets/Junior.png'),
                                             fit: BoxFit.fill,
                                           ),
                                           Positioned(
@@ -170,7 +150,7 @@ class PrincipalScreenState extends State<PrincipalScreen> {
                                         fit: StackFit.passthrough,
                                         children: <Widget>[
                                           FittedBox(
-                                            child: Image.network("http://nextrestaurants.com/wp-content/uploads/2019/07/Restaurants-TriviaNights-Marketing-1024x576.png"),
+                                            child: Image.asset('assets/Senior.png'),
                                             fit: BoxFit.fill,
                                           ),
                                           Positioned(
@@ -224,8 +204,8 @@ class PrincipalScreenState extends State<PrincipalScreen> {
                                         fit: StackFit.passthrough,
                                         children: <Widget>[
                                           FittedBox(
-                                            child: Image.network("http://nextrestaurants.com/wp-content/uploads/2019/07/Restaurants-TriviaNights-Marketing-1024x576.png"),
-                                            fit: BoxFit.fill,
+                                            child: Image.asset('assets/Senior.png'),
+                                            fit: BoxFit.fitWidth,
                                           ),
                                           Positioned(
                                             top: 0,
@@ -242,6 +222,50 @@ class PrincipalScreenState extends State<PrincipalScreen> {
                                                         bottomRight: Radius.circular(32))),
                                                 child: Text(
                                                   "Modo de Juego Profesional",
+                                                  textAlign: TextAlign.center,
+                                                  style: Resource.style.homeItemTitle(),
+                                                ),
+                                              ),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+
+                                ),),                                  SafeArea(child:PureInkWell(
+                                  onTap: () {
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute<Null>(builder: (BuildContext context) {
+                                          return new WebViewWebPage(url: "https://inscripciones.utpl.edu.ec/",title: "Inscripciones| UTPL");
+                                        }));
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(bottom: 16),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.all(Radius.circular(18)),
+                                      child: Stack(
+                                        fit: StackFit.passthrough,
+                                        children: <Widget>[
+                                          FittedBox(
+                                            child: Image.network("https://www.utpl.edu.ec/sites/default/files/slider-admisiones_0.jpg"),
+                                            fit: BoxFit.fill,
+                                          ),
+                                          Positioned(
+                                            top: 0,
+                                            left: 0,
+                                            right: 0,
+                                            child: FractionallySizedBox(
+                                              widthFactor: 0.5,
+                                              alignment: Alignment.topLeft,
+                                              child: Container(
+                                                padding: EdgeInsets.symmetric(vertical: 12),
+                                                decoration: BoxDecoration(
+                                                    color: Resource.color.mainColorLight,
+                                                    borderRadius: BorderRadius.only(
+                                                        bottomRight: Radius.circular(32))),
+                                                child: Text(
+                                                  "Informate sobre el proceso de admisión",
                                                   textAlign: TextAlign.center,
                                                   style: Resource.style.homeItemTitle(),
                                                 ),
@@ -286,7 +310,7 @@ class PrincipalScreenState extends State<PrincipalScreen> {
                                           fit: StackFit.passthrough,
                                           children: <Widget>[
                                             FittedBox(
-                                              child: Image.network("http://nextrestaurants.com/wp-content/uploads/2019/07/Restaurants-TriviaNights-Marketing-1024x576.png"),
+                                              child: Image.asset('assets/Junior.png'),
                                               fit: BoxFit.fill,
                                             ),
                                             Positioned(
@@ -319,7 +343,7 @@ class PrincipalScreenState extends State<PrincipalScreen> {
                                     onTap: () {
                                       Navigator.of(context).push(
                                           MaterialPageRoute<Null>(builder: (BuildContext context) {
-                                            return new WebViewWebPage(url: "https://www.utpl.edu.ec/oferta-academica/",title: "Oferta Academica| UTPL");
+                                            return new WebViewWebPage(url: "https://inscripciones.utpl.edu.ec/presencial",title: "Oferta Academica| UTPL");
                                           }));
                                     },
                                     child: Padding(
@@ -330,7 +354,7 @@ class PrincipalScreenState extends State<PrincipalScreen> {
                                           fit: StackFit.passthrough,
                                           children: <Widget>[
                                             FittedBox(
-                                              child: Image.network("https://noticias.utpl.edu.ec/sites/default/files/imagenes_editor/sin_titulo.png"),
+                                              child: Image.network("https://www.utpl.edu.ec/sites/default/files/img-bg-rendicion.jpg"),
                                               fit: BoxFit.fill,
                                             ),
                                             Positioned(
@@ -374,7 +398,7 @@ class PrincipalScreenState extends State<PrincipalScreen> {
                                           fit: StackFit.passthrough,
                                           children: <Widget>[
                                             FittedBox(
-                                              child: Image.network("https://inscripciones.utpl.edu.ec/sites/default/files/styles/slide/public/banners/bg-casa-abierta-presencial.jpg?itok=g25Rlcw8"),
+                                              child: Image.network("https://www.utpl.edu.ec/sites/default/files/slider-admisiones_0.jpg"),
                                               fit: BoxFit.fill,
                                             ),
                                             Positioned(
@@ -403,18 +427,13 @@ class PrincipalScreenState extends State<PrincipalScreen> {
                                       ),
                                     ),
                                   ),),])))
-                );
-
-              }
-                return LoadingScreen();
 
 
-              // Hasta que se reciba información valida mostramos un spinner de espera
-
-            }),
 
 
-      ),
+
+
+        )),
 
 
 
@@ -426,7 +445,6 @@ class PrincipalScreenState extends State<PrincipalScreen> {
       bottomNavigationBar: AppBottomNav(),
     );
   }
-
 
 
 }

@@ -1,9 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:loading_indicator_view/loading_indicator_view.dart';
-import 'package:progress_indicators/progress_indicators.dart';
-import 'package:quizapp/shared/loader.dart';
 
 class LeaderboardScreen extends StatelessWidget {
 
@@ -168,7 +164,7 @@ class LeaderboardScreen extends StatelessWidget {
                                   });
                             } else {
                               return Center(
-                                child: Loader(),
+                                child: CircularProgressIndicator(),
                               );
                             }
                           }))

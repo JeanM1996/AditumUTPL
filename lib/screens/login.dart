@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:quizapp/screens/screens.dart';
 import '../shared/shared.dart';
 import '../services/services.dart';
+import 'general.dart';
 
 class LoginScreen extends StatefulWidget {
   createState() => LoginScreenState();
@@ -39,11 +41,11 @@ class LoginScreenState extends State<LoginScreen> {
               size: 150,
             ),
             Text(
-              'Login to Start',
+              'Aditum UTPL',
               style: Theme.of(context).textTheme.headline,
               textAlign: TextAlign.center,
             ),
-            Text('Your Tagline'),
+            Text('Preparate para ingresar a la U'),
             RegisterButton(
               text: 'Registrarse',
               icon: FontAwesomeIcons.userPlus,
@@ -61,11 +63,7 @@ class LoginScreenState extends State<LoginScreen> {
               color: Colors.black45,
               loginMethod: auth.googleSignIn,
             ),
-            FbButton(
-              text: 'Iniciar Sesión con Facebook',
-              icon: FontAwesomeIcons.facebook,
-              color: Colors.black45,
-            ),
+
           ],
         ),
       ),
@@ -101,7 +99,10 @@ class LoginButton extends StatelessWidget {
 
                 Navigator.pushReplacementNamed(context, '/formU');
               } else {
-                Navigator.of(context).pushNamed('/general');
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => PrincipalScreen()));
               }
             });
 
