@@ -265,7 +265,7 @@ class PrincipalScreen extends StatelessWidget {
                                         fit: StackFit.passthrough,
                                         children: <Widget>[
                                           FittedBox(
-                                            child: Image.asset('assets/Senior.png'),
+                                            child: Image.asset('assets/Profesional.png'),
                                             fit: BoxFit.fitWidth,
                                           ),
                                           Positioned(
