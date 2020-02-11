@@ -43,7 +43,7 @@ dependencies:
   conditional: ^0.0.1
   edge_alert: ^0.0.1
   condition: ^0.0.7
-
+  platform_alert_dialog: ^1.0.0+2
 
 dev_dependencies:
   flutter_test:

@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:platform_alert_dialog/platform_alert_dialog.dart';
 import 'package:quizapp/screens/quiz.dart';
 import 'package:quizapp/shared/PureInkWell.dart';
 import 'package:quizapp/styles/resource.dart';
@@ -73,19 +74,39 @@ class PrincipalScreen extends StatelessWidget {
                               children: [
                                 SafeArea(child:PureInkWell(
                                   onTap: () {
-                                    showCupertinoDialog(
+                                    showDialog<void>(
                                       context: context,
-                                      builder: (BuildContext context) => CupertinoAlertDialog(
-                                        title: const Text('Modo de Juego Junior consiste en .... .'),
-                                        actions: <Widget>[
-                                          CupertinoDialogAction(
-                                            child: const Text('Jugar'),
-                                            onPressed: () {
-                                              Navigator.pop(context, QuizScreen());
-                                            },
+                                      builder: (BuildContext context) {
+                                        return PlatformAlertDialog(
+                                          title: Text('Modo de Juego Junior'),
+                                          content: SingleChildScrollView(
+                                            child: ListBody(
+                                              children: <Widget>[
+                                                Text('Juego Rápido.'),
+                                                Text('5 preguntas cada una con 10 segundos'),
+                                              ],
+                                            ),
                                           ),
-                                        ],
-                                      ),
+                                          actions: <Widget>[
+                                            PlatformDialogAction(
+                                              child: Text('Cerrar'),
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                            ),
+                                            PlatformDialogAction(
+                                              child: Text('Jugar'),
+                                              actionType: ActionType.Preferred,
+                                              onPressed: () {
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) => QuizScreen()));
+                                              },
+                                            ),
+                                          ],
+                                        );
+                                      },
                                     );
                                   },
                                   child: Padding(
@@ -127,19 +148,39 @@ class PrincipalScreen extends StatelessWidget {
                                 ),),
                                 SafeArea(child:PureInkWell(
                                   onTap: () {
-                                    showCupertinoDialog(
+                                    showDialog<void>(
                                       context: context,
-                                      builder: (BuildContext context) => CupertinoAlertDialog(
-                                        title: const Text('Modo de Juego Senior consiste en .... .'),
-                                        actions: <Widget>[
-                                          CupertinoDialogAction(
-                                            child: const Text('ok'),
-                                            onPressed: () {
-                                              Navigator.pop(context, 'ok');
-                                            },
+                                      builder: (BuildContext context) {
+                                        return PlatformAlertDialog(
+                                          title: Text('Modo de Juego Senior'),
+                                          content: SingleChildScrollView(
+                                            child: ListBody(
+                                              children: <Widget>[
+                                                Text('Juego Sin tiempo, practica sin apuros.'),
+                                                Text('Número de preguntas de la prueba, sin tiempo'),
+                                              ],
+                                            ),
                                           ),
-                                        ],
-                                      ),
+                                          actions: <Widget>[
+                                            PlatformDialogAction(
+                                              child: Text('Cerrar'),
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                            ),
+                                            PlatformDialogAction(
+                                              child: Text('Jugar'),
+                                              actionType: ActionType.Preferred,
+                                              onPressed: () {
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) => QuizScreen()));
+                                              },
+                                            ),
+                                          ],
+                                        );
+                                      },
                                     );
                                   },
                                   child: Padding(
@@ -181,19 +222,39 @@ class PrincipalScreen extends StatelessWidget {
                                 ),),
                                 SafeArea(child:PureInkWell(
                                   onTap: () {
-                                    showCupertinoDialog(
+                                    showDialog<void>(
                                       context: context,
-                                      builder: (BuildContext context) => CupertinoAlertDialog(
-                                        title: const Text('Modo de Juego Profesional consiste en .... .'),
-                                        actions: <Widget>[
-                                          CupertinoDialogAction(
-                                            child: const Text('ok'),
-                                            onPressed: () {
-                                              Navigator.pop(context, 'ok');
-                                            },
+                                      builder: (BuildContext context) {
+                                        return PlatformAlertDialog(
+                                          title: Text('Modo de Juego Profesional'),
+                                          content: SingleChildScrollView(
+                                            child: ListBody(
+                                              children: <Widget>[
+                                                Text('Practica REAL, piensa y razona.'),
+                                                Text('Número de preguntas de la prueba, con tiempo reglamentario'),
+                                              ],
+                                            ),
                                           ),
-                                        ],
-                                      ),
+                                          actions: <Widget>[
+                                            PlatformDialogAction(
+                                              child: Text('Cerrar'),
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                            ),
+                                            PlatformDialogAction(
+                                              child: Text('Jugar'),
+                                              actionType: ActionType.Preferred,
+                                              onPressed: () {
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) => QuizScreen()));
+                                              },
+                                            ),
+                                          ],
+                                        );
+                                      },
                                     );
                                   },
                                   child: Padding(
@@ -287,19 +348,39 @@ class PrincipalScreen extends StatelessWidget {
                                 children: [
                                   SafeArea(child:PureInkWell(
                                     onTap: () {
-                                      showCupertinoDialog(
+                                      showDialog<void>(
                                         context: context,
-                                        builder: (BuildContext context) => CupertinoAlertDialog(
-                                          title: const Text('Modo de Juego Junior consiste en .... .'),
-                                          actions: <Widget>[
-                                            CupertinoDialogAction(
-                                              child: const Text('ok'),
-                                              onPressed: () {
-                                                Navigator.pop(context, 'ok');
-                                              },
+                                        builder: (BuildContext context) {
+                                          return PlatformAlertDialog(
+                                            title: Text('Modo de Juego Junior'),
+                                            content: SingleChildScrollView(
+                                              child: ListBody(
+                                                children: <Widget>[
+                                                  Text('Juego Rápido.'),
+                                                  Text('5 preguntas cada una con 10 segundos'),
+                                                ],
+                                              ),
                                             ),
-                                          ],
-                                        ),
+                                            actions: <Widget>[
+                                              PlatformDialogAction(
+                                                child: Text('Cerrar'),
+                                                onPressed: () {
+                                                  Navigator.of(context).pop();
+                                                },
+                                              ),
+                                              PlatformDialogAction(
+                                                child: Text('Jugar'),
+                                                actionType: ActionType.Preferred,
+                                                onPressed: () {
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) => QuizScreen()));
+                                                },
+                                              ),
+                                            ],
+                                          );
+                                        },
                                       );
                                     },
                                     child: Padding(
@@ -445,6 +526,26 @@ class PrincipalScreen extends StatelessWidget {
       bottomNavigationBar: AppBottomNav(),
     );
   }
-
-
+  Column _buildButtonColumn(Color color, IconData icon, String label) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(icon, color: color),
+        Container(
+          margin: const EdgeInsets.only(top: 8),
+          child: Text(
+            label,
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w400,
+              color: color,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
 }
+
+
